@@ -151,7 +151,7 @@ nav ul li a:hover {
   color: white;
   text-decoration: none;
   font-weight: bold;
-  border-radius: 4px;
+  border-radius: 50%;
   animation: rgb-border 4s infinite linear;
   transition: var(--transition);
 }
