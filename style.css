@@ -1,214 +1,213 @@
 /* =========================================
-   1. RESET & VARIABEL (DASAR)
+   1. VARIABLES & ANIMATIONS
    ========================================= */
 
-/* Mengatur variabel warna agar mudah diganti-ganti nanti */
 :root {
-  --warna-utama: #3EB489;       /* Hijau Mint Segar */
-  --warna-utama-gelap: #2E8B68; /* Hijau yang lebih gelap untuk efek hover */
-  --warna-bg: #FFFDF5;          /* Krem Lembut (Cream/Ivory) untuk background */
-  --warna-teks: #333333;        /* Abu-abu gelap (bukan hitam pekat) agar mata tidak cepat lelah */
-  --warna-putih: #FFFFFF;       /* Putih bersih untuk kartu proyek */
-  --bayangan: 0 4px 6px rgba(0,0,0,0.1); /* Efek bayangan halus */
+  --bg-dark: #080808;
+  --card-bg: #121212;
+  --text-white: #ffffff;
+  --text-gray: #a0a0a0;
+  --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
-/* Reset CSS: Menghapus margin/padding bawaan browser */
+/* Animasi RGB */
+@keyframes rgb-text {
+  0% { color: #ff0000; text-shadow: 0 0 10px #ff0000; }
+  33% { color: #00ff00; text-shadow: 0 0 10px #00ff00; }
+  66% { color: #0000ff; text-shadow: 0 0 10px #0000ff; }
+  100% { color: #ff0000; text-shadow: 0 0 10px #ff0000; }
+}
+
+@keyframes rgb-border {
+  0% { border-color: #ff0000; box-shadow: 0 0 15px #ff0000; }
+  33% { border-color: #00ff00; box-shadow: 0 0 15px #00ff00; }
+  66% { border-color: #0000ff; box-shadow: 0 0 15px #0000ff; }
+  100% { border-color: #ff0000; box-shadow: 0 0 15px #ff0000; }
+}
+
+/* Animasi Geser */
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(40px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideRight {
+  from { opacity: 0; transform: translateX(-60px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+/* =========================================
+   2. DASAR & BODY
+   ========================================= */
+
 * {
   margin: 0;
   padding: 0;
-  box-sizing: border-box; /* Memastikan padding tidak menambah lebar elemen */
+  box-sizing: border-box;
 }
 
-/* Mengatur scroll agar halus saat klik menu navigasi */
 html {
   scroll-behavior: smooth;
 }
 
-/* Mengatur gaya dasar font dan warna background */
 body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Font modern bawaan sistem */
-  background-color: var(--warna-bg); /* Menggunakan warna krem */
-  color: var(--warna-teks); /* Warna teks dasar */
-  line-height: 1.6; /* Jarak antar baris tulisan agar mudah dibaca */
+  font-family: 'Segoe UI', sans-serif;
+  background-color: var(--bg-dark);
+  color: var(--text-white);
+  line-height: 1.6;
+  overflow-x: hidden;
 }
 
-/* Mengatur wadah umum (Container) agar konten tidak terlalu melebar ke pinggir */
 .container {
-  padding: 60px 20px; /* Jarak atas-bawah 60px, kiri-kanan 20px */
-  max-width: 1200px;  /* Lebar maksimal konten */
-  margin: 0 auto;     /* Posisi tengah otomatis */
-}
-
-/* Judul setiap bagian (h2) */
-section h2 {
-  text-align: center;      /* Teks rata tengah */
-  font-size: 2.5rem;       /* Ukuran huruf besar */
-  margin-bottom: 40px;     /* Jarak ke konten di bawahnya */
-  color: var(--warna-utama); /* Warna hijau mint */
-  text-transform: uppercase; /* Huruf kapital semua */
-  letter-spacing: 2px;     /* Jarak antar huruf */
-}
-
-/* =========================================
-   2. NAVIGASI (HEADER)
-   ========================================= */
-
-header {
-  background-color: var(--warna-putih); /* Latar belakang putih */
-  box-shadow: var(--bayangan);          /* Memberikan bayangan di bawah */
-  position: fixed;  /* Navigasi tetap nempel di atas saat discroll */
-  top: 0;
-  width: 100%;      /* Lebar penuh */
-  z-index: 1000;    /* Agar navigasi selalu di atas elemen lain */
-}
-
-nav {
-  display: flex;    /* Menggunakan Flexbox untuk tata letak */
-  justify-content: space-between; /* Logo di kiri, Menu di kanan */
-  align-items: center; /* Posisi vertikal tengah */
-  padding: 15px 5%;    /* Jarak di dalam navigasi */
+  padding: 100px 20px;
   max-width: 1200px;
   margin: 0 auto;
 }
 
-/* Gaya untuk Logo Teks */
+section h2 {
+  text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: 50px;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  animation: rgb-text 5s infinite linear;
+}
+
+/* =========================================
+   3. NAVIGASI
+   ========================================= */
+
+header {
+  background: rgba(0, 0, 0, 0.9);
+  border-bottom: 2px solid #222;
+  position: fixed;
+  top: 0; width: 100%; z-index: 1000;
+  backdrop-filter: blur(10px);
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 5%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
 .logo {
-  font-size: 1.5rem;
+  font-size: 1.6rem;
   font-weight: bold;
-  color: var(--warna-teks);
 }
 
 .logo span {
-  color: var(--warna-utama); /* Mewarnai kata "Porto" dengan hijau */
+  animation: rgb-text 3s infinite linear;
 }
 
-/* Menghilangkan titik-titik (bullet) pada list menu */
 nav ul {
   list-style: none;
-  display: flex; /* Menu berjejer ke samping */
-  gap: 20px;     /* Jarak antar menu */
+  display: flex;
+  gap: 25px;
 }
 
-/* Gaya link navigasi */
 nav ul li a {
-  text-decoration: none; /* Menghapus garis bawah link */
-  color: var(--warna-teks);
-  font-weight: 500;
-  transition: color 0.3s; /* Efek transisi halus saat warna berubah */
+  text-decoration: none;
+  color: var(--text-white);
+  font-weight: 600;
+  transition: var(--transition);
 }
 
-/* Efek saat mouse diarahkan ke menu (Hover) */
 nav ul li a:hover {
-  color: var(--warna-utama); /* Berubah jadi hijau */
+  color: #00f2ff;
+  text-shadow: 0 0 10px #00f2ff;
 }
 
 /* =========================================
-   3. HERO SECTION (BERANDA)
+   4. HERO SECTION
    ========================================= */
 
 .hero {
-  height: 100vh; /* Tinggi memenuhi 100% layar laptop (Viewport Height) */
-  display: flex; /* Flexbox untuk mensejajarkan teks dan gambar */
-  align-items: center; /* Vertikal tengah */
-  justify-content: center; /* Horizontal tengah */
-  padding: 0 10%; /* Jarak kiri kanan */
-  gap: 50px; /* Jarak antara teks dan gambar */
-  margin-top: 60px; /* Kompensasi karena navbar fixed */
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 60px;
+  padding: 0 10%;
 }
 
 .hero-content {
-  flex: 1; /* Mengambil sisa ruang yang ada */
+  flex: 1;
+  animation: slideRight 1s ease-out;
 }
 
 .hero-content h1 {
-  font-size: 3rem; /* Ukuran nama sangat besar */
-  color: var(--warna-utama);
-  margin: 10px 0;
+  font-size: 3.5rem;
+  margin-bottom: 10px;
 }
 
-.hero-content p {
-  font-size: 1.1rem;
-  margin-bottom: 20px;
-  color: #555;
-}
-
-/* Tombol "About Me" */
 .btn-hero {
   display: inline-block;
-  padding: 10px 25px;
-  background-color: var(--warna-utama);
-  color: var(--warna-putih);
+  padding: 12px 30px;
+  border: 2px solid white;
+  color: white;
   text-decoration: none;
-  border-radius: 25px; /* Membuat tombol lonjong */
-  transition: background 0.3s;
+  font-weight: bold;
+  border-radius: 4px;
+  animation: rgb-border 4s infinite linear;
+  transition: var(--transition);
 }
 
 .btn-hero:hover {
-  background-color: var(--warna-utama-gelap); /* Gelap saat di-hover */
+  background: white;
+  color: black;
+  transform: scale(1.1);
 }
 
-/* Membungkus gambar agar bisa dibentuk lingkaran */
+/* Foto Hero */
 .hero-logo img {
-  width: 300px;  /* Lebar gambar */
-  height: 300px; /* Tinggi gambar sama agar jadi persegi/lingkaran */
-  object-fit: cover; /* Agar gambar tidak gepeng */
-  border-radius: 50%; /* Membuat gambar jadi bulat */
-  border: 5px solid var(--warna-utama); /* Bingkai hijau */
-  box-shadow: var(--bayangan);
+  width: 350px;
+  height: 350px;
+  object-fit: cover;
+  border-radius: 20px; /* Sesuai request sebelumnya: kotak melengkung */
+  border: 4px solid #222;
+  animation: slideUp 1s ease-out 0.2s backwards;
+  transition: var(--transition);
+}
+
+.hero-logo img:hover {
+  animation: rgb-border 2s infinite linear;
+  transform: translateY(-10px);
 }
 
 /* =========================================
-   4. ABOUT SECTION
+   5. PROYEK (GRID SELECT)
    ========================================= */
 
-.about-content {
-  text-align: center; /* Teks rata tengah */
-  max-width: 800px;   /* Membatasi lebar teks agar enak dibaca */
-  margin: 0 auto;     /* Posisi tengah */
-}
-
-.about-content p {
-  margin-bottom: 15px; /* Jarak antar paragraf */
-}
-
-/* =========================================
-   5. PROYEK (GRID LAYOUT)
-   ========================================= */
-
-.bg-light {
-  background-color: #f0fdf4; /* Latar belakang hijau sangat muda khusus bagian proyek */
-}
-
-/* Ini bagian PENTING: Membuat kartu sejajar otomatis */
 .proyek-grid {
-  display: grid; /* Mengaktifkan mode Grid */
-  /* Rumus Ajaib Responsif: Membuat kolom otomatis minimal 250px */
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
-  gap: 30px; /* Jarak antar kartu */
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 30px;
 }
 
-/* Gaya Kartu Proyek */
 .proyek-card {
-  background-color: var(--warna-putih);
-  border-radius: 10px; /* Sudut melengkung */
-  overflow: hidden;    /* Agar gambar tidak keluar dari radius */
-  box-shadow: var(--bayangan);
-  text-decoration: none; /* Hapus garis bawah link */
-  color: var(--warna-teks);
-  transition: transform 0.3s; /* Efek gerak halus */
-  display: flex;
-  flex-direction: column;
+  background: var(--card-bg);
+  border-radius: 12px;
+  overflow: hidden;
+  text-decoration: none;
+  color: white;
+  border: 1px solid #333;
+  transition: var(--transition);
+  animation: slideUp 1s ease-out;
 }
 
-/* Efek kartu naik sedikit saat di-hover */
 .proyek-card:hover {
-  transform: translateY(-10px); 
+  transform: translateY(-10px);
+  border-color: #00ff00;
 }
 
 .proyek-card img {
-  width: 100%; /* Gambar memenuhi lebar kartu */
-  height: 200px; /* Tinggi gambar tetap */
-  object-fit: cover; /* Gambar dipotong rapi menyesuaikan kotak */
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
 }
 
 .proyek-info {
@@ -216,39 +215,56 @@ nav ul li a:hover {
   text-align: center;
 }
 
-.proyek-info h3 {
-  color: var(--warna-utama);
-  margin-bottom: 10px;
-}
-
 /* =========================================
-   6. MEDIA SOSIAL
+   6. MEDIA SOSIAL (BULAT & TEXT BAWAH)
    ========================================= */
 
 .medsos-list {
-  display: flex;     /* Berjejer ke samping */
-  justify-content: center; /* Rata tengah */
-  gap: 30px;         /* Jarak antar ikon */
-  flex-wrap: wrap;   /* Agar turun ke bawah jika layar sempit */
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  flex-wrap: wrap;
 }
 
 .medsos-item {
   display: flex;
-  flex-direction: column; /* Ikon di atas, teks di bawah */
+  flex-direction: column; /* Menumpuk: Gambar di atas, Tulisan di bawah */
   align-items: center;
   text-decoration: none;
-  color: var(--warna-teks);
-  transition: transform 0.3s;
-}
-
-.medsos-item:hover {
-  transform: scale(1.1); /* Membesar sedikit saat di-hover */
-  color: var(--warna-utama);
+  color: var(--text-gray);
+  transition: var(--transition);
+  animation: slideUp 1s ease-out;
 }
 
 .medsos-item img {
-  width: 50px; /* Ukuran ikon */
-  margin-bottom: 10px;
+  width: 70px; /* Ukuran ikon */
+  height: 70px;
+  background: #1a1a1a;
+  padding: 15px;
+  border-radius: 50%; /* Membuat gambar bulat sempurna */
+  border: 2px solid #333;
+  margin-bottom: 15px; /* Jarak antara gambar dan tulisan */
+  transition: var(--transition);
+  object-fit: contain;
+}
+
+.medsos-item span {
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  letter-spacing: 1px;
+}
+
+/* Hover Medsos */
+.medsos-item:hover {
+  color: var(--text-white);
+  transform: translateY(-10px);
+}
+
+.medsos-item:hover img {
+  background: transparent;
+  animation: rgb-border 2s infinite linear; /* Lingkaran berubah warna saat hover */
+  transform: scale(1.1);
 }
 
 /* =========================================
@@ -256,9 +272,15 @@ nav ul li a:hover {
    ========================================= */
 
 footer {
-  background-color: var(--warna-utama); /* Footer hijau */
-  color: var(--warna-putih);
+  background: #000;
+  padding: 40px 20px;
   text-align: center;
-  padding: 20px;
+  border-top: 2px solid #222;
   margin-top: 50px;
+}
+
+@media (max-width: 768px) {
+  .hero { flex-direction: column-reverse; text-align: center; padding-top: 100px; }
+  .hero-logo img { width: 250px; height: 250px; }
+  .hero-content h1 { font-size: 2.5rem; }
 }
