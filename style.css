@@ -56,8 +56,12 @@ body {
   color: var(--text-white);
   line-height: 1.6;
   overflow-x: hidden;
+  cursor: url('pointer.png'), auto;
 }
 
+a, button, .proyek-card, .medsos-item {
+  cursor: url('pointer.png'), pointer;
+}
 .container {
   padding: 100px 20px;
   max-width: 1200px;
